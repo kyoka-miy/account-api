@@ -22,6 +22,11 @@ public class UserController {
     public UserController(UserService useService) {
         this.userService = useService;
     }
+
+    @RequestMapping("/")
+    String home() {
+        return "Hello World!";
+    }
     @PostMapping("signup")
     public UserResponseBody createUser(@Valid @RequestBody User user, BindingResult bindingResult) {
         if (user.getPassword() != null && (user.getPassword().length() < 8 || user.getPassword().length() > 20)) {
