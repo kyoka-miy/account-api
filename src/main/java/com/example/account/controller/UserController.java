@@ -23,7 +23,7 @@ public class UserController {
         this.userService = useService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("")
     String home() {
         return "Hello World!";
     }
