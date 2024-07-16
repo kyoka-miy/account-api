@@ -18,6 +18,25 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: account
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      env:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/account
+        SPRING_DATASOURCE_USERNAME: postgres
+        SPRING_DATASOURCE_PASSWORD: password
 
     steps:
     - uses: actions/checkout@v4
@@ -27,6 +46,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Wait for PostgreSQL to be ready
+      run: |
+          until pg_isready -h localhost -p 5432 -U postgres; do
+            sleep 1
+          done
     - name: Build with Maven
       run: mvn clean install
     - name: Run tests
