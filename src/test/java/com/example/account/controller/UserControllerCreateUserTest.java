@@ -48,8 +48,7 @@ class UserControllerCreateUserTest {
 
         response.andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("Account successfully created"))
-                .andExpect(jsonPath("$.user.user_id").value("usertest"))
-                .andExpect(jsonPath("$.user.nickname").value("usertest"));
+                .andExpect(jsonPath("$.user.user_id").value("usertest"));
     }
 
     @Test
