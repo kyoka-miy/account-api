@@ -19,11 +19,7 @@ Backend application for user account management
     ```sh
     git clone https://github.com/kyoka-miy/account-api.git
     ```
-2. Navigate to the project directory:
-    ```sh
-    cd your-repository
-    ```
-3. Install dependencies:
+2. Install dependencies:
     ```sh
     mvn install
     ```
